@@ -1,13 +1,12 @@
 /*
  * multitarefas.h
  *
- */ 
+ */
 
 
 #ifndef MULTITAREFAS_H_
 #define MULTITAREFAS_H_
 
-#include <asf.h>
 #include "stdint.h"
 #include "cpu-port.h"
 
@@ -15,10 +14,10 @@
 /* macros de configuracao */
 
 /* numero de tarefas */
-#define NUMERO_DE_TAREFAS	3
+#define NUMERO_DE_TAREFAS	6
 
-/* número de prioridades/tarefas */
-#define PRIORIDADE_MAXIMA   4
+/* nÃºmero de prioridades/tarefas */
+#define PRIORIDADE_MAXIMA   5
 
 /* frequencia de clock da CPU */
 #define cfg_CPU_CLOCK_HZ 	48000000
@@ -38,11 +37,11 @@ typedef uint16_t  tick_t;
 
 typedef struct
 {
-	const char		*nome;
-	stackptr_t 	stack_pointer;
-	estado_tarefa_t estado;
-	prioridade_t 	prioridade;
-	uint16_t		tempo_espera;
+    const char		*nome;
+    stackptr_t 	stack_pointer;
+    estado_tarefa_t estado;
+    prioridade_t 	prioridade;
+    uint16_t		tempo_espera;
 }tcb_t;
 
 extern  uint8_t		tarefa_atual;
@@ -56,10 +55,10 @@ extern  prioridade_t Prioridades[PRIORIDADE_MAXIMA+1];
 * Estrutura de controle do semaforo
 */
 
-typedef struct 
+typedef struct
 {
-	uint8_t     contador;            ///< Contador do semaforo
-	uint8_t 	tarefaEsperando;        ///< Tarefa esperando
+    uint8_t     contador;            ///< Contador do semaforo
+    uint8_t 	tarefaEsperando;        ///< Tarefa esperando
 } semaforo_t;
 
 
@@ -75,7 +74,7 @@ void ExecutaMarcaDeTempo(void);
 
 void TarefaSuspende(uint8_t id_tarefa);
 void TarefaContinua(uint8_t id_tarefa);
-void TarefaEspera(tick_t qtas_marcas);		
+void TarefaEspera(tick_t qtas_marcas);
 
 void SemaforoAguarda(semaforo_t* sem);
 void SemaforoLibera(semaforo_t* sem);
